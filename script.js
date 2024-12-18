@@ -1,40 +1,21 @@
-// script.js
-
-// Typewriter Effect for index.html
-document.addEventListener('DOMContentLoaded', () => {
-    const typewriterElement = document.getElementById('typewriter');
-    if (typewriterElement) {
-        const text = "Welcome To Our Platform !!!";
-        let index = 0;
-        const speed = 100;
-
-        function typeWriter() {
-            if (index < text.length) {
-                typewriterElement.textContent += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, speed);
-            }
-        }
-
-        typeWriter();
-    }
-});
-
-// Open booking form modal on institute.html
+// Open the booking form modal
 function openBookingForm(productName) {
     const modal = document.getElementById('booking-modal');
     const productNameField = document.getElementById('product-name');
 
     if (modal && productNameField) {
+        // Set the product name in the input field
         productNameField.value = productName;
+        // Show the modal
         modal.style.display = 'block';
     }
 }
 
-// Close booking form modal
+// Close the booking form modal
 function closeBookingForm() {
     const modal = document.getElementById('booking-modal');
     if (modal) {
+        // Hide the modal
         modal.style.display = 'none';
     }
 }
@@ -43,7 +24,7 @@ function closeBookingForm() {
 const bookingForm = document.getElementById('booking-form');
 if (bookingForm) {
     bookingForm.addEventListener('submit', (event) => {
-        event.preventDefault();
+        event.preventDefault();  // Prevent form from submitting normally
 
         const productName = document.getElementById('product-name').value;
         const instituteName = document.getElementById('institute-name').value;
@@ -60,18 +41,19 @@ if (bookingForm) {
             requirements
         });
 
+        // Show success message (you can modify this or create a separate element for it)
         alert('Your booking request has been submitted!');
+
+        // Close the modal after submission
         closeBookingForm();
     });
 }
 
-// Redirect logic for missing authentication (e.g., accessing institute.html without login)
+// Redirect logic for missing authentication (e.g., accessing this page without login)
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.pathname.includes('institute.html')) {
-        const loggedIn = localStorage.getItem('institute-id');
-        if (!loggedIn) {
-            alert('Please log in to access this page.');
-            window.location.href = 'login.html';
-        }
+    const loggedIn = localStorage.getItem('institute-id');
+    if (!loggedIn) {
+        alert('Please log in to access this page.');
+        window.location.href = 'login.html';  // Redirect to login page
     }
 });
